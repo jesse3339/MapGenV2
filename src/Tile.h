@@ -9,5 +9,5 @@ struct Tile
 	sf::Vector2f position;
 
 
-	Tile(int type, sf::Color col);
+	Tile(int type, sf::Vector2f pos, sf::Color col);
 };

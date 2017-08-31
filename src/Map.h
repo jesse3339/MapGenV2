@@ -45,7 +45,7 @@ public:
 
 	std::minstd_rand randDet;
 private:
-	Tile blank = Tile(0, sf::Color::Black);
+	Tile blank = Tile(0, sf::Vector2f(0, 0), sf::Color::Black);
 	std::vector<Tile> mapContents;
 	int width_;
 	int height_;

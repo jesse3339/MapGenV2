@@ -1,8 +1,8 @@
 #include "Tile.h"
 
-Tile::Tile(int type, sf::Color col)
+Tile::Tile(int type, sf::Vector2f pos, sf::Color col)
 {
 	tileType = type;
-	//position = pos;
+	position = pos;
 	color = col;
 }

@@ -15,7 +15,6 @@ Tile & Map2D::ValueAt(int x, int y)
 }
 
 
-
 Map2D::Map2D(std::vector<Tile> &startData)
 {
 	//takes square root of the starting data to set the width and height and then copies the data to map contents
@@ -49,7 +48,6 @@ void Map2D::Expand()
 		for (int x = 0; x < width_; x++)
 		{
 			mapContents.insert(mapContents.begin() + (width_ * ((h) * 2)) - width_, blank);
-
 		}
 		height_++;
 
@@ -90,8 +88,44 @@ void Map2D::Expand()
 		}
 		width_++;
 
+		//checks nearest neighbors then sets the color to one of them
+		for (int y = 0; y < height_; y++)
+		{
+			Tile child = blank;
+			Tile left = ValueAt(w - 1, y);
+			Tile right = ValueAt(w + 1, y);
+
+			if (left.color == right.color)
+			{
+				child.color = left.color;
+				SetValue(w, y, child);
+			}
+			else
+			{
+				int det = randDet() % 2 + 1;
+				if (det == 1)
+				{
+					child.color = left.color;
+					SetValue(w, y, child);
+				}
+				else
+				{
+					child.color = right.color;
+					SetValue(w, y, child);
+				}
+			}
+		}
 	}
 
-	
-
+	//sets the correct positions for the new tiles
+	for (int x = 0; x < width_; x++)
+	{
+		for (int y = 0; y < height_; y++)
+		{
+			Tile copied = ValueAt(x, y);
+			sf::Vector2f currentPos(x, y);
+			copied.position = currentPos;
+			SetValue(x, y, copied);
+		}
+	}
 }
